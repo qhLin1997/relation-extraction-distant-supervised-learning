@@ -1,53 +1,29 @@
-# distant-supervised-relation-extraction
-Implementation of [Neural Relation Extraction with Selective Attention over Instances](https://www.aclweb.org/anthology/P16-1200.pdf).
-
-## Environment Requirements
-* python 3.6
-* pytorch 1.3.0
-* gensim 3.8.0
-* matplotloib 3.1.2
-* sklearn 0.21.3
-
 ## Data
 * [NYT10](https://raw.githubusercontent.com/thunlp/NRE/master/data.zip)
+* [en_core_web_lg](https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.3.0/en_core_web_lg-2.3.0.tar.gz)
+* [en_core_web_sm](https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz)
 
 ## Usage
-1. Download the `NYT10` and decompress it in the current directory.
-2. Preprocess the original data, and the processed data is stored in `processed` folder.
+1. Download and unzip the `NYT10` data and put it in the current folder.
+2. Delete `test.txt` and random sample 20% items from `train.txt` as the new `test.txt`.
+3. Download `en_core_web_lg` or `en_core_web_sm` of spaCy and put it in the current folder.
+4. Put corpus into the `data` folder.
+5. Put the target relation set into the `data` folder.
+6. Run `wikidataautolabelling.py`.
 ```shell
-python preprocess.py
+python3 wikidataautolabelling.py
 ```
-3. You can use the following the commands to start the program.
+7. Run `preprocess.py`.
+8. Run the following concands.
 ```shell
-python run.py --encoder='cnn' --selector='one'
-python run.py --encoder='cnn' --selector='att'
-python run.py --encoder='cnn' --selector='avg'
-python run.py --encoder='pcnn' --selector='one'
-python run.py --encoder='pcnn' --selector='att'
-python run.py --encoder='pcnn' --selector='avg'
+python3 run.py --encoder='cnn' --selector='one'
+python3 run.py --encoder='cnn' --selector='att'
+python3 run.py --encoder='cnn' --selector='avg'
+python3 run.py --encoder='pcnn' --selector='one'
+python3 run.py --encoder='pcnn' --selector='att'
+python3 run.py --encoder='pcnn' --selector='avg'
 ```
-
-More details can be seen by `python run.py -h`.
-
-4. You can use run the `draw.py` to visualize the results.
+9. Run `draw.py` to visualize the results.
 ```shell
-python draw.py
+python3 draw.py
 ```
-
-## Result
-The results of my version are present as follows:
-<img src="./pr_pcnn.png" alt="pr_cnn" style="zoom:75%;" />
-<img src="./pr_pcnn.png" alt="pr_pcnn" style="zoom:75%;" />
-
-
-*Note*:
-* Some settings may be different from those mentioned in the paper.
-* No validation set used during training.
-* Some errors exists in my code, but on the whole it is right.
-* If you have any suggestions, please ***Issue***.
-
-
-## Reference Link
-* https://github.com/thunlp/NRE
-* https://github.com/thunlp/OpenNRE
-
